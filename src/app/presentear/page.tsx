@@ -38,6 +38,12 @@ export default function Presentear() {
   }
 
   function handleNames(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log({
+      music,
+      names,
+      message,
+      files
+    })
     setNames(event.target.value)
     setUrl(slugify(event.target.value))
   }
@@ -72,7 +78,7 @@ export default function Presentear() {
               >
                 Adicionar fotos (Máximo: {option === "premium" ? 5 : 3})
               </button>
-              {option === 'premium' && <Input label="Música" type="url" placeholder="Link da música no Youtube" id="music"/>}
+              {option === 'premium' && <Input onChange={(e) => setMusic(e.target.value)} label="Música" type="url" placeholder="Link da música no Youtube" id="music"/>}
               <Button additionalClasses='mt-8' size='lg'>
                 Finalizar
               </Button>
