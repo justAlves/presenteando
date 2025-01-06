@@ -5,7 +5,7 @@ export async function POST(req: Request){
 
   const id = params.get('data.id')
 
-  const paymentStatus = payment.get({ id: id as string})
+  const paymentStatus = await payment.get({ id: id as string})
 
   console.log(paymentStatus)
 
