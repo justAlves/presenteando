@@ -1,10 +1,16 @@
+'use client'
+
 import Button from '@/components/button'
 import FAQ from '@/components/faq'
 import PriceCard from '@/components/price-card'
 import RotativeText from '@/components/rotative-text'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
+
 export default function Home() {
+  const router = useRouter()
+
   return (
     <>
       <header className='p-4'>
@@ -19,7 +25,11 @@ export default function Home() {
             <p className='text-2xl text-gray-900 mt-4'>
               Escolher o presente perfeito nunca foi tão fácil — e sem aquela sensação de &quot;esqueci da data&quot;. Navegue por nossas opções e encontre algo tão incrível que até você vai querer um desses para si mesmo! 🎁
             </p>
-            <Button additionalClasses='mt-8' size='lg'>
+            <Button 
+              onClick={() => router.push('/presentear')}
+              additionalClasses='mt-8' 
+              size='lg'
+            >
               Surpreenda alguém!
             </Button>
           </div>
@@ -57,7 +67,11 @@ export default function Home() {
         <div className='border border-orange-500 rounded p-16 flex flex-col items-center'>
           <h2 className='font-black text-orange-500 text-5xl'>Vamos presentear alguém!</h2>
           <p className='text-2xl my-4'>Demora menos de 5 minutos para criar um presente personalizado! </p>
-          <Button additionalClasses='mt-8' size='lg'>
+          <Button
+            onClick={() => router.push('/presentear')}
+            additionalClasses='mt-8' 
+            size='lg'
+          >
             Presenteie alguém!
           </Button>
         </div>

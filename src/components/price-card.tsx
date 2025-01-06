@@ -1,8 +1,11 @@
 import { CheckCircle2Icon, XCircleIcon } from 'lucide-react'
 import React from 'react'
 import Button from './button'
+import { useRouter } from 'next/navigation'
 
 export default function PriceCard() {
+  const router = useRouter()
+
   return (
     <div className='flex flex-col lg:flex-row gap-16 justify-center lg:justify-evenly mt-20 lg:mt-32'>
       <div className='lg:w-[24rem] flex flex-col rounded bg-white shadow-lg border border-orange-500 hover:scale-105 transition-all'>
@@ -18,7 +21,9 @@ export default function PriceCard() {
           </ul>
         </div>
         <div className='w-full flex justify-center pb-8'>
-          <Button>
+          <Button
+            onClick={() => router.push('/presentear')}
+          >
             Quero presentear!
           </Button>
         </div>
@@ -39,7 +44,9 @@ export default function PriceCard() {
           </ul>
         </div>
         <div className='w-full flex justify-center pb-8'>
-          <Button>
+          <Button
+            onClick={() => router.push('/presentear')}
+          >
             Quero presentear!
           </Button>
         </div>

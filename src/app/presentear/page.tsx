@@ -38,14 +38,47 @@ export default function Presentear() {
   }
 
   function handleNames(event: React.ChangeEvent<HTMLInputElement>) {
-    console.log({
-      music,
-      names,
-      message,
-      files
-    })
     setNames(event.target.value)
     setUrl(slugify(event.target.value))
+  }
+
+  async function handleSubmit(){
+    if(!names || !message || !files || !url) {
+      alert('Preencha todos os campos')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('names', names)
+    formData.append('message', message)
+    formData.append('url', url)
+
+    if(option === 'premium') {
+      if(!music) {
+        alert('Preencha todos os campos')
+        return
+      }
+
+      formData.append('music', music)
+    }
+
+    for(let i = 0; i < files.length; i++) {
+      console.log(files[i])
+      formData.append('files', files[i])
+    }
+
+    const response = await fetch('/api/presentes', {
+      method: 'POST',
+      body: formData
+    })
+
+    console.log(response)
+
+    if(response.ok) {
+      alert('Presente criado com sucesso!')
+    } else {
+      alert('Erro ao criar presente')
+    }
   }
 
   return (
@@ -79,7 +112,7 @@ export default function Presentear() {
                 Adicionar fotos (Máximo: {option === "premium" ? 5 : 3})
               </button>
               {option === 'premium' && <Input onChange={(e) => setMusic(e.target.value)} label="Música" type="url" placeholder="Link da música no Youtube" id="music"/>}
-              <Button additionalClasses='mt-8' size='lg'>
+              <Button onClick={handleSubmit} additionalClasses='mt-8' size='lg'>
                 Finalizar
               </Button>
             </div>
@@ -96,7 +129,7 @@ export default function Presentear() {
             <div className="flex flex-col items-center h-full">              
                 <div className="flex mt-4">
                   <div className="w-[22rem] text-nowrap border rounded p-2 border-orange-500 overflow-x-scroll">
-                    www.presenteando.com.br/{url}
+                    www.presenteandobr.vercel.app/{url}
                   </div>
                 </div>
                 <div className="w-2/3 h-3/4 border border-orange-500 rounded mt-4 flex justify-center items-center">
