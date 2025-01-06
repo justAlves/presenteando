@@ -44,6 +44,7 @@ export async function POST(req: Request){
         })
       }
 
+      console.log(_)
       const { data: publicUrl } = supabaseClient.storage
         .from('presentes')
         .getPublicUrl(filePath);
